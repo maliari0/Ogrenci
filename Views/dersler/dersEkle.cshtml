@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "dersEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Ders Kodu</label>
+        <input type="text" class="form-control" name="dkod" required="" />
+    </div>
+
+    <div>
+        <label>Ders Adı</label>
+        <input type="text" class="form-control" name="dadi" required="" />
+    </div>
+
+    <div>
+        <label>Teorik Ders Saati</label>
+        <input type="text" class="form-control" name="dteo" required="" />
+    </div>
+
+    <div>
+        <label>Uygulamalı Ders Saati</label>
+        <input type="text" class="form-control" name="duyg" required="" />
+    </div>
+
+    <div>
+        <label>Ders AKTS</label>
+        <input type="text" class="form-control" name="dakts" required="" />
+    </div>
+
+
+    <div style="margin-top:25px">
+        <button class="btn btn-success">Onayla</button>
+    </div>
+
+</form>
+
+

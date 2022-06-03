@@ -1,0 +1,42 @@
+﻿@model Ogrenci.Models.Entity.ogrenci
+@{
+    ViewBag.Title = "GetOgrenci";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("OgrenciGuncelle", "ogrenci", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(k => k.ogrno)
+        @Html.TextBoxFor(k => k.ogrno, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogradi)
+        @Html.TextBoxFor(k => k.ogradi, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogrsoyadi)
+        @Html.TextBoxFor(k => k.ogrsoyadi, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogradres)
+        @Html.TextBoxFor(k => k.ogradres, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogrbolumu)
+        @Html.TextBoxFor(k => k.ogrbolumu, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogrcins)
+        @Html.TextBoxFor(k => k.ogrcins, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogrtcno)
+        @Html.TextBoxFor(k => k.ogrtcno, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ogrdogumtar)
+        @Html.TextBoxFor(k => k.ogrdogumtar, new { @class = "form-control" })
+
+        <div>
+            <button class="btn btn-warning">Öğrenci Güncelle</button>
+        </div>
+
+    </div>
+}
+
+
+

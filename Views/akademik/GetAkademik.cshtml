@@ -1,0 +1,42 @@
+﻿@model Ogrenci.Models.Entity.akademik
+@{
+    ViewBag.Title = "GetAkademik";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("AkademikGuncelle", "akademik", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.LabelFor(k => k.pkod)
+    @Html.TextBoxFor(k => k.pkod, new { @class = "form-control" })
+
+    @Html.LabelFor(k => k.sicilno)
+    @Html.TextBoxFor(k => k.sicilno, new { @class = "form-control" })
+
+    @Html.LabelFor(k => k.padi)
+    @Html.TextBoxFor(k => k.padi, new { @class = "form-control" })
+
+    @Html.LabelFor(k => k.psoyadi)
+    @Html.TextBoxFor(k => k.psoyadi, new { @class = "form-control" })
+
+    @Html.LabelFor(k => k.bransi)
+    @Html.TextBoxFor(k => k.bransi, new { @class = "form-control" })
+
+    @Html.LabelFor(k => k.bolumu)
+    @Html.TextBoxFor(k => k.bolumu, new { @class = "form-control" })
+
+    @Html.LabelFor(k => k.ptc)
+    @Html.TextBoxFor(k => k.ptc, new { @class = "form-control" })
+
+
+    <div>
+        <button class="btn btn-warning">Personel Güncelle</button>
+
+
+    </div>
+
+
+
+</div>
+}
+

@@ -1,0 +1,36 @@
+﻿@model Ogrenci.Models.Entity.notlar
+@{
+    ViewBag.Title = "GetNotlar";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("NotlarGuncelle", "notlar", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(k => k.ogrno)
+        @Html.TextBoxFor(k => k.ogrno, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.dkod)
+        @Html.TextBoxFor(k => k.dkod, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.vize)
+        @Html.TextBoxFor(k => k.vize, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.final)
+        @Html.TextBoxFor(k => k.final, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.ddurum)
+        @Html.TextBoxFor(k => k.ddurum, new { @class = "form-control" })
+
+
+        <div>
+            <button class="btn btn-warning">Notu Güncelle</button>
+
+
+        </div>
+
+
+
+    </div>
+}
+

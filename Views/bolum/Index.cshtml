@@ -1,0 +1,38 @@
+﻿@using Ogrenci.Models.Entity
+
+@model List<bolumler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Bölüm kodu</th>
+        <th>Bölüm Adı</th>
+        <th>Bölüm Başkanı</th>
+        <th>Bölüm Kontenjanı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    <tbody>
+        @foreach (var bolumler in Model)
+        {
+            <tr>
+                <td>@bolumler.bkod</td>
+                <td>@bolumler.badi</td>
+                <td>@bolumler.bbsk</td>
+                <td>@bolumler.bkon</td>
+                <td><a href="/bolum/Sil/@bolumler.bkod" class="btn btn-danger">Sil</a></td>
+                <td><a href="/bolum/GetBolumler/@bolumler.bkod" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+
+<a href="/bolum/BolumlerEkle" class="btn btn-info">Yeni Bölüm Ekle</a>
+

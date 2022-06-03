@@ -1,0 +1,44 @@
+﻿@using Ogrenci.Models.Entity
+
+@model List<akademik>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Personel Kodu</th>
+        <th>Sicil No</th>
+        <th>Personel Adı</th>
+        <th>Personel Soyadı</th>
+        <th>Branş</th>
+        <th>Bölümü</th>
+        <th>Personel TC No</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    <tbody>
+        @foreach (var akademik in Model)
+        {
+            <tr>
+                <td>@akademik.pkod</td>
+                <td>@akademik.sicilno</td>
+                <td>@akademik.padi</td>
+                <td>@akademik.psoyadi</td>
+                <td>@akademik.bransi</td>
+                <td>@akademik.bolumu</td>
+                <td>@akademik.ptc</td>
+                <td><a href="/akademik/Sil/@akademik.pkod" class="btn btn-danger">Sil</a></td>
+                <td><a href="/akademik/GetAkademik/@akademik.pkod" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+
+<a href="/akademik/AkademikEkle" class="btn btn-info">Yeni Personel Ekle</a>
+

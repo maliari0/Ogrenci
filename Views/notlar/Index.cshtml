@@ -1,0 +1,40 @@
+﻿@using Ogrenci.Models.Entity
+
+@model List<notlar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Öğrenci No</th>
+        <th>Ders Kodu</th>
+        <th>Vize Notu</th>
+        <th>Final Notu</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    <tbody>
+        @foreach (var notlar in Model)
+        {
+            <tr>
+                <td>@notlar.ogrno</td>
+                <td>@notlar.dkod</td>
+                <td>@notlar.vize</td>
+                <td>@notlar.final</td>
+                <td>@notlar.ddurum</td>
+                <td><a href="/notlar/Sil/@notlar.ogrno" class="btn btn-danger">Sil</a></td>
+                <td><a href="/notlar/GetNotlar/@notlar.ogrno" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+
+<a href="/notlar/NotlarEkle" class="btn btn-info">Yeni Not Ekle</a>
+

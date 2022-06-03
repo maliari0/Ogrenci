@@ -1,0 +1,46 @@
+﻿@using Ogrenci.Models.Entity;
+@model List<ogrenci>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ögrenci No</th>
+        <th>Öğrenci TC No</th>
+        <th>Ögrenci Adı</th>
+        <th>Öğrenci Soyadı</th>
+        <th>Öğrenci Adresi</th>
+        <th>Öğrenci Bölümü</th>
+        <th>Öğrenci Cinsiyet</th>
+        <th>Öğrenci Doğum Tarihi</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    <tbody>
+        @foreach (var ogrenci in Model)
+        {
+        <tr>
+            <td>@ogrenci.ogrno</td>
+            <td>@ogrenci.ogrtcno</td>
+            <td>@ogrenci.ogradi</td>
+            <td>@ogrenci.ogrsoyadi</td>
+            <td>@ogrenci.ogradres</td>
+            <td>@ogrenci.ogrbolumu</td>
+            <td>@ogrenci.ogrcins</td>
+            <td>@ogrenci.ogrdogumtar</td>
+            <td><a href="/Ogrenci/Sil/@ogrenci.ogrno" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Ogrenci/GetOgrenci/@ogrenci.ogrno" class="btn btn-primary">Güncelle</a></td>
+        </tr>
+        }
+
+
+    </tbody>
+
+</table>
+
+<a href="/ogrenci/OgrenciEkle" class="btn btn-info">Yeni Öğrenci Ekle</a>     <!--bir sorun çıkarsa href kısmını sil -->

@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ogr_otoBM2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ogr_otoBM2020.dbo.aka_ders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="aka_ders">
+          <Key>
+            <PropertyRef Name="pkod" />
+            <PropertyRef Name="dkod" />
+          </Key>
+          <Property Name="pkod" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="dkod" Type="char" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="akademik">
+          <Key>
+            <PropertyRef Name="pkod" />
+          </Key>
+          <Property Name="pkod" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="sicilno" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="padi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="psoyadi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="bransi" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="bolumu" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ptc" Type="char" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bolumler">
+          <Key>
+            <PropertyRef Name="bkod" />
+          </Key>
+          <Property Name="bkod" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="badi" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="bbsk" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="bkon" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ders">
+          <Key>
+            <PropertyRef Name="dkod" />
+          </Key>
+          <Property Name="dkod" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="dadi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dteo" Type="tinyint" Nullable="false" />
+          <Property Name="duyg" Type="tinyint" Nullable="false" />
+          <Property Name="dakts" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ogr_otoBM2020.dbo.notlar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="notlar">
+          <Key>
+            <PropertyRef Name="dkod" />
+            <PropertyRef Name="ogrno" />
+          </Key>
+          <Property Name="ogrno" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="dkod" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="vize" Type="tinyint" Nullable="false" />
+          <Property Name="final" Type="tinyint" Nullable="false" />
+          <Property Name="ddurum" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ogrenci">
+          <Key>
+            <PropertyRef Name="ogrno" />
+          </Key>
+          <Property Name="ogrno" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ogradi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ogrsoyadi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ogradres" Type="varchar" MaxLength="50" />
+          <Property Name="ogrbolumu" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ogrcins" Type="bit" />
+          <Property Name="ogrtcno" Type="char" MaxLength="11" />
+          <Property Name="ogrdogumtar" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_aka_ders_akademik">
+          <End Role="akademik" Type="Self.akademik" Multiplicity="1" />
+          <End Role="aka_ders" Type="Self.aka_ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="akademik">
+              <PropertyRef Name="pkod" />
+            </Principal>
+            <Dependent Role="aka_ders">
+              <PropertyRef Name="pkod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aka_ders_ders">
+          <End Role="ders" Type="Self.ders" Multiplicity="1" />
+          <End Role="aka_ders" Type="Self.aka_ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ders">
+              <PropertyRef Name="dkod" />
+            </Principal>
+            <Dependent Role="aka_ders">
+              <PropertyRef Name="dkod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notlar_ders">
+          <End Role="ders" Type="Self.ders" Multiplicity="1" />
+          <End Role="notlar" Type="Self.notlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ders">
+              <PropertyRef Name="dkod" />
+            </Principal>
+            <Dependent Role="notlar">
+              <PropertyRef Name="dkod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notlar_ogrenci">
+          <End Role="ogrenci" Type="Self.ogrenci" Multiplicity="1" />
+          <End Role="notlar" Type="Self.notlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ogrenci">
+              <PropertyRef Name="ogrno" />
+            </Principal>
+            <Dependent Role="notlar">
+              <PropertyRef Name="ogrno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ogr_otoBM2020ModelStoreContainer">
+          <EntitySet Name="akademik" EntityType="Self.akademik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bolumler" EntityType="Self.bolumler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ders" EntityType="Self.ders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ogrenci" EntityType="Self.ogrenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aka_ders" EntityType="Self.aka_ders" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [aka_ders].[pkod] AS [pkod], 
+    [aka_ders].[dkod] AS [dkod]
+    FROM [dbo].[aka_ders] AS [aka_ders]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="notlar" EntityType="Self.notlar" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [notlar].[ogrno] AS [ogrno], 
+    [notlar].[dkod] AS [dkod], 
+    [notlar].[vize] AS [vize], 
+    [notlar].[final] AS [final], 
+    [notlar].[ddurum] AS [ddurum]
+    FROM [dbo].[notlar] AS [notlar]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_aka_ders_akademik" Association="Self.FK_aka_ders_akademik">
+            <End Role="akademik" EntitySet="akademik" />
+            <End Role="aka_ders" EntitySet="aka_ders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aka_ders_ders" Association="Self.FK_aka_ders_ders">
+            <End Role="ders" EntitySet="ders" />
+            <End Role="aka_ders" EntitySet="aka_ders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notlar_ders" Association="Self.FK_notlar_ders">
+            <End Role="ders" EntitySet="ders" />
+            <End Role="notlar" EntitySet="notlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notlar_ogrenci" Association="Self.FK_notlar_ogrenci">
+            <End Role="ogrenci" EntitySet="ogrenci" />
+            <End Role="notlar" EntitySet="notlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ogr_otoBM2020Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="akademik">
+          <Key>
+            <PropertyRef Name="pkod" />
+          </Key>
+          <Property Name="pkod" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="sicilno" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="padi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="psoyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bransi" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="bolumu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ptc" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ders" Relationship="Self.aka_ders" FromRole="akademik" ToRole="ders" />
+        </EntityType>
+        <EntityType Name="bolumler">
+          <Key>
+            <PropertyRef Name="bkod" />
+          </Key>
+          <Property Name="bkod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="badi" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bbsk" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bkon" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ders">
+          <Key>
+            <PropertyRef Name="dkod" />
+          </Key>
+          <Property Name="dkod" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dteo" Type="Byte" Nullable="false" />
+          <Property Name="duyg" Type="Byte" Nullable="false" />
+          <Property Name="dakts" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="notlar" Relationship="Self.FK_notlar_ders" FromRole="ders" ToRole="notlar" />
+          <NavigationProperty Name="akademik" Relationship="Self.aka_ders" FromRole="ders" ToRole="akademik" />
+        </EntityType>
+        <EntityType Name="ogrenci">
+          <Key>
+            <PropertyRef Name="ogrno" />
+          </Key>
+          <Property Name="ogrno" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ogradi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ogrsoyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ogradres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ogrbolumu" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ogrcins" Type="Boolean" />
+          <Property Name="ogrtcno" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="ogrdogumtar" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="notlar" Relationship="Self.FK_notlar_ogrenci" FromRole="ogrenci" ToRole="notlar" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="notlar">
+          <Key>
+            <PropertyRef Name="dkod" />
+            <PropertyRef Name="ogrno" />
+          </Key>
+          <Property Name="ogrno" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dkod" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="vize" Type="Byte" Nullable="false" />
+          <Property Name="final" Type="Byte" Nullable="false" />
+          <Property Name="ddurum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ders" Relationship="Self.FK_notlar_ders" FromRole="notlar" ToRole="ders" />
+          <NavigationProperty Name="ogrenci" Relationship="Self.FK_notlar_ogrenci" FromRole="notlar" ToRole="ogrenci" />
+        </EntityType>
+        <Association Name="FK_notlar_ders">
+          <End Role="ders" Type="Self.ders" Multiplicity="1" />
+          <End Role="notlar" Type="Self.notlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ders">
+              <PropertyRef Name="dkod" />
+            </Principal>
+            <Dependent Role="notlar">
+              <PropertyRef Name="dkod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notlar_ogrenci">
+          <End Role="ogrenci" Type="Self.ogrenci" Multiplicity="1" />
+          <End Role="notlar" Type="Self.notlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ogrenci">
+              <PropertyRef Name="ogrno" />
+            </Principal>
+            <Dependent Role="notlar">
+              <PropertyRef Name="ogrno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aka_ders">
+          <End Role="akademik" Type="Self.akademik" Multiplicity="*" />
+          <End Role="ders" Type="Self.ders" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ogr_otoBM2020Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="akademik" EntityType="Self.akademik" />
+          <EntitySet Name="bolumler" EntityType="Self.bolumler" />
+          <EntitySet Name="ders" EntityType="Self.ders" />
+          <EntitySet Name="ogrenci" EntityType="Self.ogrenci" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="notlar" EntityType="Self.notlar" />
+          <AssociationSet Name="FK_notlar_ders" Association="Self.FK_notlar_ders">
+            <End Role="ders" EntitySet="ders" />
+            <End Role="notlar" EntitySet="notlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notlar_ogrenci" Association="Self.FK_notlar_ogrenci">
+            <End Role="ogrenci" EntitySet="ogrenci" />
+            <End Role="notlar" EntitySet="notlar" />
+          </AssociationSet>
+          <AssociationSet Name="aka_ders" Association="Self.aka_ders">
+            <End Role="akademik" EntitySet="akademik" />
+            <End Role="ders" EntitySet="ders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ogr_otoBM2020ModelStoreContainer" CdmEntityContainer="ogr_otoBM2020Entities">
+          <EntitySetMapping Name="akademik">
+            <EntityTypeMapping TypeName="ogr_otoBM2020Model.akademik">
+              <MappingFragment StoreEntitySet="akademik">
+                <ScalarProperty Name="pkod" ColumnName="pkod" />
+                <ScalarProperty Name="sicilno" ColumnName="sicilno" />
+                <ScalarProperty Name="padi" ColumnName="padi" />
+                <ScalarProperty Name="psoyadi" ColumnName="psoyadi" />
+                <ScalarProperty Name="bransi" ColumnName="bransi" />
+                <ScalarProperty Name="bolumu" ColumnName="bolumu" />
+                <ScalarProperty Name="ptc" ColumnName="ptc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bolumler">
+            <EntityTypeMapping TypeName="ogr_otoBM2020Model.bolumler">
+              <MappingFragment StoreEntitySet="bolumler">
+                <ScalarProperty Name="bkod" ColumnName="bkod" />
+                <ScalarProperty Name="badi" ColumnName="badi" />
+                <ScalarProperty Name="bbsk" ColumnName="bbsk" />
+                <ScalarProperty Name="bkon" ColumnName="bkon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ders">
+            <EntityTypeMapping TypeName="ogr_otoBM2020Model.ders">
+              <MappingFragment StoreEntitySet="ders">
+                <ScalarProperty Name="dkod" ColumnName="dkod" />
+                <ScalarProperty Name="dadi" ColumnName="dadi" />
+                <ScalarProperty Name="dteo" ColumnName="dteo" />
+                <ScalarProperty Name="duyg" ColumnName="duyg" />
+                <ScalarProperty Name="dakts" ColumnName="dakts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ogrenci">
+            <EntityTypeMapping TypeName="ogr_otoBM2020Model.ogrenci">
+              <MappingFragment StoreEntitySet="ogrenci">
+                <ScalarProperty Name="ogrno" ColumnName="ogrno" />
+                <ScalarProperty Name="ogradi" ColumnName="ogradi" />
+                <ScalarProperty Name="ogrsoyadi" ColumnName="ogrsoyadi" />
+                <ScalarProperty Name="ogradres" ColumnName="ogradres" />
+                <ScalarProperty Name="ogrbolumu" ColumnName="ogrbolumu" />
+                <ScalarProperty Name="ogrcins" ColumnName="ogrcins" />
+                <ScalarProperty Name="ogrtcno" ColumnName="ogrtcno" />
+                <ScalarProperty Name="ogrdogumtar" ColumnName="ogrdogumtar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ogr_otoBM2020Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notlar">
+            <EntityTypeMapping TypeName="ogr_otoBM2020Model.notlar">
+              <MappingFragment StoreEntitySet="notlar">
+                <ScalarProperty Name="ogrno" ColumnName="ogrno" />
+                <ScalarProperty Name="dkod" ColumnName="dkod" />
+                <ScalarProperty Name="vize" ColumnName="vize" />
+                <ScalarProperty Name="final" ColumnName="final" />
+                <ScalarProperty Name="ddurum" ColumnName="ddurum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="aka_ders" TypeName="ogr_otoBM2020Model.aka_ders" StoreEntitySet="aka_ders">
+            <EndProperty Name="akademik">
+              <ScalarProperty Name="pkod" ColumnName="pkod" />
+            </EndProperty>
+            <EndProperty Name="ders">
+              <ScalarProperty Name="dkod" ColumnName="dkod" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

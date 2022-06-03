@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "NotlarEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Öğrenci No</label>
+        <input type="text" class="form-control" name="ogrno" required="" />
+    </div>
+
+    <div>
+        <label>Ders Kodu</label>
+        <input type="text" class="form-control" name="dkod" required="" />
+    </div>
+
+    <div>
+        <label>Vize Notu</label>
+        <input type="text" class="form-control" name="vize" required="" />
+    </div>
+
+    <div>
+        <label>Final Notu</label>
+        <input type="text" class="form-control" name="final" required="" />
+    </div>
+
+    <div>
+        <label>Ders Durumu</label>
+        <input type="text" class="form-control" name="ddurum" required="" />
+    </div>
+
+
+    <div style="margin-top:25px">
+        <button class="btn btn-success">Onayla</button>
+    </div>
+
+</form>
+

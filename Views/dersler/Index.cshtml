@@ -1,0 +1,41 @@
+﻿@using Ogrenci.Models.Entity
+
+@model List<ders>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ders kodu</th>        
+        <th>Ders Adı</th>
+        <th>Teorik Ders Saati</th>
+        <th>Uygulamalı Ders Saati</th>
+        <th>Ders AKTS</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    <tbody>
+        @foreach (var ders in Model)
+        {
+            <tr>
+                <td>@ders.dkod</td>
+                <td>@ders.dadi</td>
+                <td>@ders.dteo</td>
+                <td>@ders.duyg</td>
+                <td>@ders.dakts</td>
+                <td><a href="/dersler/Sil/@ders.dkod" class="btn btn-danger">Sil</a></td>
+                <td><a href="/dersler/GetDers/@ders.dkod" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+
+<a href="/dersler/dersEkle" class="btn btn-info">Yeni Ders Ekle</a>
+

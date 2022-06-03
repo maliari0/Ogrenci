@@ -1,0 +1,36 @@
+﻿@model Ogrenci.Models.Entity.ders
+@{
+    ViewBag.Title = "GetDers";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("DersGuncelle", "ders", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(k => k.dkod)
+        @Html.TextBoxFor(k => k.dkod, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.dadi)
+        @Html.TextBoxFor(k => k.dadi, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.dteo)
+        @Html.TextBoxFor(k => k.dteo, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.duyg)
+        @Html.TextBoxFor(k => k.duyg, new { @class = "form-control" })
+
+        @Html.LabelFor(k => k.dakts)
+        @Html.TextBoxFor(k => k.dakts, new { @class = "form-control" })
+
+
+        <div>
+            <button class="btn btn-warning">Dersi Güncelle</button>
+
+
+        </div>
+
+
+
+    </div>
+}
+
